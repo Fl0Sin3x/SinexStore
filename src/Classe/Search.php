@@ -3,7 +3,7 @@
 
  use App\Entity\Category;
 
- class search
+ class Search
  {
 
      /**

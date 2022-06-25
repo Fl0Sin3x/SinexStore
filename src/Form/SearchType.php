@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Classe\search;
+use App\Classe\Search;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -43,7 +43,7 @@ class searchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => search::class,
+            'data_class' => Search::class,
             'method' => 'GET',
             'csrf_protection' => false,
         ]);

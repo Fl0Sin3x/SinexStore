@@ -23,8 +23,6 @@ public function __construct(EntityManagerInterface $em)
     #[Route('/nos-produits', name: 'products')]
     public function index(Request $request): Response
     {
-        $products = $this->em->getRepository(Product::class)->findAll();
-
         $search = new search();
         $form = $this->createForm(SearchType::class , $search);
 
@@ -32,6 +30,8 @@ public function __construct(EntityManagerInterface $em)
         if ($form->isSubmitted() && $form->isValid()) {
             $products = $this->em->getRepository(Product::class)->findWithSearch($search);
             //dd($search);
+        } else {
+            $products = $this->em->getRepository(Product::class)->findAll();
         }
 
         return $this->render('product/index.html.twig',[
