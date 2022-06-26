@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
-use App\Classe\Search;
-use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Product;
+use App\Classe\Search;
 
 /**
  * @extends ServiceEntityRepository<Product>
