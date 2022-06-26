@@ -39,7 +39,7 @@ class AccountPasswordController extends AbstractController
               $password = $encoder->encodePassword($user, $new_pwd);
 
               $user->setPassword($password);
-                $em->persist($user);
+              $em->persist($user);
               $em->flush();
               $notification = "Votre mot de passe à bien été mis a jour";
 
