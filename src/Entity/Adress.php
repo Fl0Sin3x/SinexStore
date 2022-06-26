@@ -44,6 +44,11 @@ class Adress
     #[ORM\Column(type: 'string', length: 255)]
     private $phone;
 
+    public function __toString()
+    {
+        return $this->getName().'[br]'.$this->getAdress().'[br] '.$this->getCity().'-'.$this->getCountry();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

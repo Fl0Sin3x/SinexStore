@@ -3,6 +3,7 @@
 {% block title %}Se connecter - Sinex-Store{% endblock %}
 
 {% block content %}
+    <div class="block-small">
     <div class="container">
         <form method="post">
             {% if error %}
@@ -15,26 +16,28 @@
                 </div>
             {% endif %}
             <div class="row">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-6">
-                    <div class="bg-light py-3 px-3">
-                        <h1 style="text-align: center">Connectez vous</h1>
-                        <label for="inputEmail">Adresse mail</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                               class="form-control" autocomplete="email" required autofocus>
-                        <label for="inputPassword">Mot de passe</label>
-                        <input type="password" name="password" id="inputPassword" class="form-control"
-                               autocomplete="current-password" required>
+                    <div class="col-md-3">&nbsp;</div>
+                        <div class="col-md-6">
+                            <div class="bg-light py-3 px-3">
+                                <h1 style="text-align: center">Connectez vous</h1>
+                                <label for="inputEmail">Adresse mail</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                       class="form-control" autocomplete="email" required autofocus>
+                                <label for="inputPassword">Mot de passe</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control"
+                                       autocomplete="current-password" required>
 
-                        <input type="hidden" name="_csrf_token"
-                               value="{{ csrf_token('authenticate') }}">
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}">
 
-                        <div class="form-group" style="margin-top: 10px ; text-align: center">
-                            <button type="submit" class="btn btn-primary">Connexion</button>
+                                    <button type="submit" class="btn btn-lg btn-info btn-block mt-2" >Connexion</button>
+                            </div>
                         </div>
-        </form>
-    </div>
-    </div>
+                    </div>
+            <hr>
+            <p class="text-center">Ou <a href="{{ path('register') }}">Crée un compte</a></p>
+             </form>
+        </div>
     </div>
 
 {% endblock %}
