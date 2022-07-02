@@ -51,7 +51,7 @@ public function __construct(EntityManagerInterface $em)
         if(!$product){
             return $this->redirectToRoute('Products');
         }
-        return $this->render('product/show.html.twig',[
+        return $this->render('product/order_show.html.twig',[
             'product' => $product,
         ]);
     }
