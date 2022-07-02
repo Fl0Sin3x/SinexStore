@@ -2,15 +2,18 @@
 
 namespace App\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Stripe\Checkout\Session;
 use App\Entity\OrderDetails;
 use App\Form\OrderType;
 use App\Entity\Order;
 use App\Classe\Cart;
+use Stripe\Stripe;
 
 class OrderController extends AbstractController
 {
@@ -69,6 +72,8 @@ class OrderController extends AbstractController
             //dd($delivery_content);
             // Register my order Order()
             $order = new Order();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carriers->getName());
@@ -78,24 +83,28 @@ class OrderController extends AbstractController
 
             $this->em->persist($order);
 
+
             foreach ($cart->getFull() as $product) {
 
-                $orderdetails = new OrderDetails();
-                $orderdetails->setMyOrder($order);
-                $orderdetails->setProduct($product['product']->getName());
-                $orderdetails->setQuantity($product['quantity']);
-                $orderdetails->setPrice($product['product']->getPrice());
-                $orderdetails->SetTotal($product['product']->getPrice() * $product['quantity']);
-                $this->em->persist($orderdetails);
+                $orderDetails = new OrderDetails();
+                $orderDetails->setMyOrder($order);
+                $orderDetails->setProduct($product['product']->getName());
+                $orderDetails->setQuantity($product['quantity']);
+                $orderDetails->setPrice($product['product']->getPrice());
+                $orderDetails->SetTotal($product['product']->getPrice() * $product['quantity']);
+                $this->em->persist($orderDetails);
+
+
 
             }
-            $this->em->flush();
-            // Register my products OrderDetails()
+            //dd($order);
+                $this->em->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,
                 'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
         }
         return $this->redirectToRoute('cart');
