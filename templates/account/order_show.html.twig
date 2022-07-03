@@ -6,6 +6,14 @@
 <h1>Ma Commande {{ order.reference }}</h1>
 <a href="{{ path('account_order') }}">Retour</a>
     <hr>
+    <strong>Statut de la commande</strong> :
+    {% if order.state == 1 %}
+        <span class="badge badge-success">Paiement accepté</span>
+    {% elseif order.state == 2 %}
+        <span class="badge badge-info">Préparation en cours</span>
+    {% elseif order.state == 3 %}
+        <span class="badge badge-success">Livraison en cours</span>
+    {% endif %}
     <strong>Commande passé le :</strong> {{ order.createdAt | date('d/m/Y') }}<br>
     <strong>Référence de ma commande :</strong> <small>{{ order.reference }}</small><br>
     <strong>Transporteur choisi : </strong> {{ order.carrierName }}<br>
@@ -18,7 +26,7 @@
             <th scope="col">Produit</th>
             <th scope="col">Quantité</th>
             <th scope="col">Prix unitaire</th>
-            <th scope="col">Total</th>
+            <th scope="col">Total</th>≤
         </tr>
         </thead>
         <tbody>
