@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,10 @@ class OrderValidateController extends AbstractController
             $this->em->flush();
             $cart->remove();
 
-            // Send email to user
+            $mail = new Mail();
+            $content = "Bonjour ".$order->getUser()->getFirstname()."<br> Merci pour votre commande sur le Sinex Store la boutique 100% Geek";
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(),'Votre commande sur le Sinex Store est bien validé ', $content);
+
         }
 
 
