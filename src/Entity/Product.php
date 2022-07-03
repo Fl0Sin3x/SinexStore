@@ -38,6 +38,9 @@ class Product
     #[ORM\Column(type: 'boolean')]
     private $isBest;
 
+    #[ORM\Column(type: 'boolean')]
+    private $productHome;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Product
     public function setIsBest(bool $isBest): self
     {
         $this->isBest = $isBest;
+
+        return $this;
+    }
+
+    public function isProductHome(): ?bool
+    {
+        return $this->productHome;
+    }
+
+    public function setProductHome(bool $productHome): self
+    {
+        $this->productHome = $productHome;
 
         return $this;
     }

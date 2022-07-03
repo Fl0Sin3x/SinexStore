@@ -24,11 +24,13 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $products = $this->em->getRepository(Product::class)->findByIsBest(1);
+        $products_home = $this->em->getRepository(Product::class)->findByProductHome(1);
         $headers = $this->em->getRepository(Header::class)->findAll();
 
         return $this->render('home/index.html.twig', [
             'products' => $products,
             'headers' => $headers,
+            'products_home' => $products_home,
         ]);
     }
 }
