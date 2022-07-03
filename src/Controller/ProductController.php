@@ -47,12 +47,15 @@ public function __construct(EntityManagerInterface $em)
     {
 
         $product = $this->em->getRepository(Product::class)->findOneBySlug($slug);
+        $products = $this->em->getRepository(Product::class)->findByIsBest(1);
 
         if(!$product){
             return $this->redirectToRoute('Products');
         }
-        return $this->render('product/order_show.html.twig',[
+        return $this->render('product/show.html.twig',[
             'product' => $product,
+            'products' => $products,
+
         ]);
     }
 }
